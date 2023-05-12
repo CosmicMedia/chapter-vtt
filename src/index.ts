@@ -49,7 +49,7 @@ function handleVttTimestamp(timestamp: string): string {
 }
 
 function writeCues(timestamps: TimestampResult[], duration: number): string {
-	const endTimestamp = new Date(duration * 1000).toISOString().slice(11, 19);
+	const endTimestamp = new Date(duration * 1000).toISOString().slice(11, 22);
 	
 	let vtt: string = '';
 	
@@ -110,7 +110,9 @@ function parseText(description: string): TimestampResult[] {
 }
 
 export default function generateVtt(description: string, duration: number): string {
-	let result: TimestampResult[] = parseText(description).filter(t => t.seconds <= duration);
+	let result: TimestampResult[] = parseText(description)
+		.filter(t => t.seconds <= duration)
+		.sort((a: TimestampResult, b: TimestampResult) => a.seconds - b.seconds);
 	
 	let vtt = `WEBVTT - from chapter-vtt\n\n${writeCues(result, duration)}`;
 	
