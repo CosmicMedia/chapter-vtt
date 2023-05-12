@@ -29,11 +29,29 @@ Chapter 3
 ***the 1 minute timestamp for the final chapter is the video's duration***
 
 ## Usage
-
 ```ts
 import chaptervtt from 'chapter-vtt';
 
-const vtt = chaptervtt(video.description, video.duration);
+const vtt: string = chaptervtt(video.description, video.duration);
+```
+
+## Vidstack
+If you're using [Vidstack](https://github.com/vidstack/player), it's very easy to integrate `chapter-vtt` and get slider chapters working.
+
+```ts
+// 'can-play' event on media-player
+function onCanPlay(event) {
+	const vtt: string = chaptervtt(video.description, video.duration);
+
+	if (vtt.includes('-->')) { // check for a cue
+		mediaPlayer.textTracks.add({
+			type: 'vtt',
+			kind: 'chapters',
+			default: true,
+			content: vtt
+		});
+	}
+}
 ```
 
 ## License
