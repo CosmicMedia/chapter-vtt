@@ -67,7 +67,7 @@ function handleVttTimestamp(timestamp: string): string {
  * Writes the WebVTT cues.
  * 
  * @param timestamps array of Chapters @see parseText
- * @param duration total duration of the video
+ * @param duration total duration of the video in seconds
  * @returns {string} chaptuer cues in WebVTT
  */
 function writeCues(timestamps: Chapter[], duration: number): string {
@@ -139,7 +139,7 @@ function parseText(description: string): Chapter[] {
  * Generates a WebVTT file from a video description.
  * 
  * @param description the text to parse chapters from
- * @param duration total duration of the video
+ * @param duration total duration of the video in seconds
  * @returns {string} WebVTT file of chapters
  */
 export default function generateVtt(description: string, duration: number): string {
