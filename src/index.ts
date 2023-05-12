@@ -1,6 +1,6 @@
 import { TimestampResult } from "./typings/result";
 
-function parseTimestamp(timestamp: string): number | null {
+export function parseTimestamp(timestamp: string): number | null {
 	let split: string[] = timestamp.split(':');
 	
 	if (split.length < 2 || split.length > 3) {
