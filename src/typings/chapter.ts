@@ -1,7 +1,7 @@
 /**
  * A chapter definition
  */
-export interface TimestampResult {
+export interface Chapter {
 	/**
 	 * Name of the chapter as defined after the timestamp (00:01 Chapter Name)
 	 */

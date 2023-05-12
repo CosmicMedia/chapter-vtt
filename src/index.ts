@@ -1,4 +1,4 @@
-import { TimestampResult } from "./typings/result";
+import { Chapter } from "./typings/chapter";
 
 /**
  * Parses a timestamp and returns its value in seconds
@@ -66,11 +66,11 @@ function handleVttTimestamp(timestamp: string): string {
 /**
  * Writes the WebVTT cues.
  * 
- * @param timestamps array of TimestampResults @see parseText
+ * @param timestamps array of Chapters @see parseText
  * @param duration total duration of the video
  * @returns {string} chaptuer cues in WebVTT
  */
-function writeCues(timestamps: TimestampResult[], duration: number): string {
+function writeCues(timestamps: Chapter[], duration: number): string {
 	// converts the duration into a timestamp with milliseconds
 	// i.e. 00:01:42.41
 	const endTimestamp = new Date(duration * 1000).toISOString().slice(11, 22);
@@ -91,18 +91,18 @@ function writeCues(timestamps: TimestampResult[], duration: number): string {
 }
 
 /**
- * Parses text (video description) into TimestampResults.
+ * Parses text (video description) into Chapters.
  * 
- * @see TimestampResult
+ * @see Chapter
  * @param description the text to parse chapters from
- * @returns {TimestampResult[]} array of TimestampResult (name, timestamp, seconds)
+ * @returns {Chapter[]} array of Chapter (name, timestamp, seconds)
  */
-function parseText(description: string): TimestampResult[] {
+function parseText(description: string): Chapter[] {
 	// the format we're looking for is
 	// 0:13 Chapter Name
 	const lines: string[] = description.split('\n');
 	
-	const timestamps: TimestampResult[] = [];
+	const timestamps: Chapter[] = [];
 	
 	for (const line of lines) {
 		const split = line.split(' ');
@@ -143,9 +143,9 @@ function parseText(description: string): TimestampResult[] {
  * @returns {string} WebVTT file of chapters
  */
 export default function generateVtt(description: string, duration: number): string {
-	let result: TimestampResult[] = parseText(description)
+	let result: Chapter[] = parseText(description)
 		.filter(t => t.seconds <= duration) // remove chapters defined after the video's over
-		.sort((a: TimestampResult, b: TimestampResult) => a.seconds - b.seconds); // sort chapters lowest to highest
+		.sort((a: Chapter, b: Chapter) => a.seconds - b.seconds); // sort chapters lowest to highest
 	
 	// define the WebVTT header and add the chapter cues
 	let vtt = `WEBVTT - from chapter-vtt\n\n${writeCues(result, duration)}`;
