@@ -1,0 +1,32 @@
+{
+	"name": "chapter-vtt",
+	"version": "1.0.0",
+	"description": "Generate a WebVTT file from timestamps",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"scripts": {
+		"build": "tsc",
+		"prepare": "npm run build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/CosmicMedia/chapter-vtt.git"
+	},
+	"bugs": {
+		"url": "https://github.com/CosmicMedia/chapter-vtt/issues"
+	},
+	"keywords": [],
+	"author": "Hydrogen / CosmicMedia LLC",
+	"license": "ISC",
+	"dependencies": {
+		"typescript": "^5.0.4"
+	},
+	"devDependencies": {
+		"@types/node": "^18.16.0"
+	},
+	"type": "module",
+	"files": [
+		"*.d.ts",
+		"lib/"
+	]
+}

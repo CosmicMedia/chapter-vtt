@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"declaration": true,
+		"outDir": "./lib",
+		"strict": true,
+		"allowSyntheticDefaultImports": true,
+		"moduleResolution": "node",
+		"allowImportingTsExtensions": false,
+		"types": [ "node" ]
+	},
+	"include": ["src"],
+	"exclude": ["node_modules", "**/__tests__/*"]
+}
