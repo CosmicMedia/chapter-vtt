@@ -1,6 +1,6 @@
 {
 	"name": "chapter-vtt",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Generate a WebVTT file from timestamps",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
