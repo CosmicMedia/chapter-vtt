@@ -82,6 +82,13 @@ function writeCues(timestamps: Chapter[], duration: number): string {
 	for (const timestamp of timestamps) {
 		index++;
 		
+		if (index == 1 && timestamp.seconds !== 0) {
+			console.warn('First chapter definition began before 0. Resetting');
+
+			timestamp.timestamp = '0:00';
+			timestamp.seconds = 0;
+		}
+		
 		const end: string = index == timestamps.length ? endTimestamp : handleVttTimestamp(timestamps[index].timestamp);
 
 		vtt += `${handleVttTimestamp(timestamp.timestamp)} --> ${end}\n${timestamp.name}\n\n`;
