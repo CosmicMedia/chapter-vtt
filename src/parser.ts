@@ -1,6 +1,5 @@
 import { Chapter } from "./typings/chapter";
 
-
 /**
  * Parses a timestamp and returns its value in seconds
  * 
@@ -9,7 +8,7 @@ import { Chapter } from "./typings/chapter";
  */
 export function parseTimestamp(timestamp: string): number | null {
 	// we'll split the string based on the colon that separates hours, minutes, and seconds
-	let split: string[] = timestamp.split(':');
+	const split: string[] = timestamp.split(':');
 	
 	// fail silently
 	if (split.length < 2 || split.length > 3) {
