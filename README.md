@@ -28,6 +28,11 @@ Chapter 3
 
 ***the 1 minute timestamp for the final chapter is the video's duration***
 
+## Installation
+```
+npm i chapter-vtt
+```
+
 ## Usage
 ```ts
 import chaptervtt from 'chapter-vtt';
