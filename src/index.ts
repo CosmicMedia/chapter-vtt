@@ -1,10 +1,10 @@
 import type { Chapter } from "./typings/chapter";
 
-import { writeCues } from "./writer";
-import { parseText } from "./parser";
+import { writeCues } from "./writer.js";
+import { parseText } from "./parser.js";
 
-export * from './parser';
-export * from './writer';
+export * from './parser.js';
+export * from './writer.js';
 
 /**
  * Generates a WebVTT file from a video description.
