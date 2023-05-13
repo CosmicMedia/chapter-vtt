@@ -19,10 +19,9 @@
 	"author": "Hydrogen / CosmicMedia LLC",
 	"license": "ISC",
 	"dependencies": {
-		"typescript": "^5.0.4"
 	},
 	"devDependencies": {
-		"@types/node": "^18.16.0"
+		"typescript": "^5.0.4"
 	},
 	"type": "module",
 	"files": [
