@@ -1,12 +1,35 @@
 import { Chapter } from "./typings/chapter";
 
+const TIMESTAMP_SCHEME = /([0-9]?[0-9]:)?([0-9]?[0-9]):([0-9]?[0-9])/;
+
+/**
+ * Extracts a timestamp from a string.
+ * 
+ * @param timestamp 
+ * @returns {string} the timestamp found, or null if none
+ */
+export function extractTimestamp(timestamp: string): string | null {
+	const match = timestamp.match(TIMESTAMP_SCHEME);
+
+	if (!match) {
+		return null;
+	}
+
+	return match[0];
+}
+
 /**
  * Parses a timestamp and returns its value in seconds
  * 
  * @param timestamp 
  * @returns {number} value in seconds, or null
  */
-export function parseTimestamp(timestamp: string): number | null {
+export function parseTimestamp(timestamp: string | null): number | null {
+	// timestamp is null, just move on
+	if (!timestamp) {
+		return null;
+	}
+
 	// we'll split the string based on the colon that separates hours, minutes, and seconds
 	const split: string[] = timestamp.split(':');
 	
@@ -17,8 +40,8 @@ export function parseTimestamp(timestamp: string): number | null {
 		return null;
 	}
 	
-	let seconds: number = 0;	
-	let m: number = 1;
+	let seconds: number = 0;
+	let multiplier: number = 1;
 	
 	while (split.length > 0) {
 		const pop = split.pop();
@@ -27,8 +50,8 @@ export function parseTimestamp(timestamp: string): number | null {
 			continue;
 		}
 		
-		seconds += m * parseInt(pop, 10);
-		m *= 60;
+		seconds += multiplier * parseInt(pop, 10);
+		multiplier *= 60;
 	}
 	
 	return seconds;
@@ -56,15 +79,19 @@ export function parseText(description: string): Chapter[] {
 			continue;
 		}
 		
-		const timestamp = split[0];
+		const _timestamp = split[0];
 		
-		if (!timestamp.includes(':')) {
+		if (!_timestamp.includes(':')) {
 			continue;
 		}
+
+		const timestamp = extractTimestamp(_timestamp);
 		
 		const seconds = parseTimestamp(timestamp);
 		
-		if (seconds == null) {
+		// seconds will be null if timestamp is null, but
+		// typescript doesn't realize that
+		if (seconds == null || timestamp == null) {
 			continue;
 		}
 		
